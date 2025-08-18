@@ -5,8 +5,8 @@ import jax
 from jax import numpy as jnp
 
 
-l_q = 0.3  # m, length of the quadrotor
-w_q = 2
+l_q = 1  # m, length of the quadrotor
+w_q = 1
 
 
 class PlanarQuadrotorEnv:
