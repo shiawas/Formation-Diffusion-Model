@@ -19,7 +19,7 @@ def states_to_p1p2(states: np.ndarray, l_q: float, w_q: float):
     dy = (w_q / 2) *  np.cos(phis)
 
     dx_dot = (w_q / 2) * phis_dot * -np.cos(phis)
-    dy_dot = (w_q / 2) * phis_dot * np.sin(phis) 
+    dy_dot = (w_q / 2) * phis_dot * -np.sin(phis) 
 
     p1 = np.stack([front_xs + dx, front_ys + dy], axis=1)
     p2 = np.stack([front_xs - dx, front_ys - dy], axis=1)
