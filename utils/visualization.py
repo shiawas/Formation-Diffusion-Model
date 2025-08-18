@@ -52,8 +52,8 @@ def visualize_quadrotor_simulation_result(
 
 
         # 4 corners of the rectangle
-        p1 = (front_x + dx, front_y + dy)  # front-left # 
-        p2 = (front_x - dx, front_y - dy)  # front-right # 
+        p1 = (front_x - dx, front_y - dy)  # front-left # 
+        p2 = (front_x + dx, front_y + dy)  # front-right # 
         p3 = (p2[0] - 2*quadrotor.l_q*hx, p2[1] - 2*quadrotor.l_q*hy)  # back-right #
         p4 = (p1[0] - 2*quadrotor.l_q*hx, p1[1] - 2*quadrotor.l_q*hy)  # back-left # 
 
