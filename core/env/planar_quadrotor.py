@@ -5,7 +5,7 @@ import jax
 from jax import numpy as jnp
 
 
-l_q = 0.5  # m, length of the quadrotor
+l_q = 1  # m, length of the quadrotor
 w_q = 1
 
 
