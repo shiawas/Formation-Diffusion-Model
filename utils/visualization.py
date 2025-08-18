@@ -31,8 +31,8 @@ def visualize_quadrotor_simulation_result(
     plot_obstacles(obs_center, obs_radius)
 
     # compute trajectory at FRONT (not center)
-    front_xs = [x + quadrotor.l_q * np.cos(phi) for x, phi in zip(xs, phis)]
-    front_ys = [y + quadrotor.l_q * np.sin(phi) for y, phi in zip(ys, phis)]
+    front_xs = [x + quadrotor.l_q * np.sin(phi) for x, phi in zip(xs, phis)]
+    front_ys = [y + quadrotor.l_q * np.cos(phi) for y, phi in zip(ys, phis)]
 
     # plot trajectory using FRONT
     plt.scatter(front_xs, front_ys, s=10, color="blue", alpha=0.6)
