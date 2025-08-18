@@ -40,11 +40,11 @@ def visualize_quadrotor_simulation_result(
     # plot quadrotor poses
     for (front_x, front_y, phi) in zip(front_xs[::10], front_ys[::10], phis[::10]):
 
-        hx = np.sin(phi)
-        hy = np.cos(phi)
+        hx = np.cos(phi)
+        hy = np.sin(phi)
 
-        px = np.cos(phi)
-        py = -np.sin(phi)
+        py = np.cos(phi)
+        px = -np.sin(phi)
 
         # half width vector (perpendicular to heading)
         dx = (quadrotor.w_q / 2) * px
