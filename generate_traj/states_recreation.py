@@ -1,6 +1,8 @@
 import numpy as np
 
-def states_to_p1p2(states: np.ndarray, l_q: float, w_q: float):
+def states_to_p1p2(states_file: str, l_q: float, w_q: float):
+    #should be .csv file
+    states = np.loadtxt(states_file, delimiter=',')
     xs   = states[:, 0]
     xs_dot = states[:, 1]
     ys   = states[:, 2]
