@@ -42,15 +42,24 @@ class PlanarQuadrotorEnv:
         x, x_dot, y, y_dot, phi, phi_dot = state
         u1, u2 = control
         # Quadrotor dynamics
-        x_dot_new = u1 * jnp.cos(phi)
-        y_dot_new = u1 * jnp.sin(phi)
-        phi_dot_new = u2
+        x_ddot = u1 * jnp.cos(phi)
+        y_ddot = u1 * jnp.sin(phi)
+        phi_ddot = u2
 
-        x_new = x + x_dot_new * dt
-        y_new = y + y_dot_new * dt
-        phi_new = phi + phi_dot_new * dt
-
-        next_state = jnp.array([x_new, x_dot_new, y_new, y_dot_new, phi_new, phi_dot_new], dtype=float)
+        next_state = (
+            state
+            + jnp.array(
+                [
+                    x_dot + x_ddot * dt,
+                    x_ddot,
+                    y_dot + y_ddot * dt,
+                    y_ddot,
+                    phi_dot + phi_ddot * dt,
+                    phi_ddot,
+                ]
+            )
+            * dt
+        )
 
         self.state = next_state
         return next_state
