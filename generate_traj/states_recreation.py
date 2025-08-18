@@ -21,11 +21,11 @@ def states_to_p1p2(states: np.ndarray, l_q: float, w_q: float):
     dx_dot = (w_q / 2) * phis_dot * -np.cos(phis)
     dy_dot = (w_q / 2) * phis_dot * np.sin(phis) 
 
-    p1 = np.array([front_xs + dx, front_ys + dy]).reshape(2,1,order='F')
-    p2 = np.array([front_xs - dx, front_ys - dy]).reshape(2,1,order='F')
+    p1 = np.stack([front_xs + dx, front_ys + dy], axis=1)
+    p2 = np.stack([front_xs - dx, front_ys - dy], axis=1)
 
-    p1_dot = np.array([front_xs_dot + dx_dot, front_ys_dot + dy_dot]).reshape(2,1,order='F')
-    p2_dot = np.array([front_xs_dot - dx_dot, front_ys_dot - dy_dot]).reshape(2,1,order='F')
+    p1_dot = np.stack([front_xs_dot + dx_dot, front_ys_dot + dy_dot], axis=1)
+    p2_dot = np.stack([front_xs_dot - dx_dot, front_ys_dot - dy_dot], axis=1)
 
     return p1, p1_dot, p2, p2_dot, phis, phis_dot
 
