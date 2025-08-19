@@ -1,6 +1,6 @@
 #conda run --live-stream --name maxs python -m formation.control_theme.main_robot
 
-
+#origin control law that convert from matlab
 import numpy as np
 from scipy.integrate import solve_ivp
 from formation.bearing_material.heading_unit import h_i
