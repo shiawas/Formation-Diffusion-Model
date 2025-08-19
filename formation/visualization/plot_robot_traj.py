@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from formation.visualization.DrawUnicycle import draw_unicycle
 import matplotlib.animation as animation
 
-def plot_robot_traj(t, p, theta, v, e_g, n, d, T, scale=8, save_video=False):
+def plot_robot_traj(t, p, theta, v, e_g, n, d, T, scale=0.6, save_video=False):
     """
     Plot robot trajectories and formations (Python version of plot_robot_traj.m)
 
