@@ -2,13 +2,17 @@ import numpy as np
 from scipy.linalg import block_diag
 
 def compute_alpha_bound(H, g_list, nf, xi_a):
+    '''
+    array to glist
+    g_list = [g_star[:, i] for i in range(g_star.shape[1])]
+    '''
     """
     Compute lower bound on alpha according to formula.
     
     Parameters
     ----------
     H : (m, n) incidence matrix
-    g_list : list of (d,) bearing unit vectors
+    g_list : list of (d,) bearing unit vectors dtype :list
     nf : number of followers
     xi_a : scalar parameter
     
