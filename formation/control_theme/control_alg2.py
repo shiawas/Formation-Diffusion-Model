@@ -3,8 +3,12 @@ from formation.bearing_material.bearing_vector import br
 from formation.bearing_material.signum_term import signum_term
 from formation.bearing_material.projection import Pr
 from formation.bearing_material.g_utils import compute_g_and_gdot
+from scipy.interpolate import interp1d
+from formation.data_transformation import load_leader_trajectories
 
-from scipy.linalg import block_diag
+# using np.gradient to calculate a1_traj from p1dot from .csv file
+
+v1_func, v2_func, a1_func, a2_func = load_leader_trajectories("combined_data.csv", dt=0.1)
 
 def control_law_timevarying(t, x, H, g_star, kp, kv, alpha):
 
@@ -39,15 +43,13 @@ def control_law_timevarying(t, x, H, g_star, kp, kv, alpha):
 
     u = term1 + term2 + term3 # (8,)
     
-    vr = np.array([
-        [0.35, 0.35], 
-        [0.3*np.cos(0.03*t), 0.3*np.cos(0.03*t)]
-    ])
+    v1 = v1_func(t)
+    v2 = v2_func(t)
+    a1 = a1_func(t)
+    a2 = a2_func(t)
 
-    vr_dot = np.array([
-        [0.0, 0.0],
-        [-0.009*np.sin(0.03*t), -0.009*np.sin(0.03*t)]
-    ])
+    vr = np.column_stack([v1, v2])
+    vr_dot = np.column_stack([a1, a2])
 
     dp = v
     dv = u.reshape(d, n, order='F')
