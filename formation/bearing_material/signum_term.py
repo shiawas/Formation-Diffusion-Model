@@ -1,6 +1,6 @@
 import numpy as np
 from formation.bearing_material.lambda_min import compute_lambda_min
-from formation.bearing_material.make_g_list import make_g_list_and_norm
+from formation.bearing_material.g_utils import compute_g_and_gdot
 from formation.bearing_material.projection import Pr
 
 
@@ -19,7 +19,7 @@ def signum_term(H, p, g_star, beta_c):
     leaders = [0, 1]  # Python index (MATLAB 1,2)
     followers = [i for i in range(n) if i not in leaders]
 
-    g_list, _ = make_g_list_and_norm(H, p)
+    g_list, _ , _ = compute_g_and_gdot(H, p)
 
     for i in followers:
         lambda_i = compute_lambda_min(i, H, g_list)
