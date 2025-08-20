@@ -4,11 +4,11 @@ from formation.bearing_material.signum_term import signum_term
 from formation.bearing_material.projection import Pr
 from formation.bearing_material.g_utils import compute_g_and_gdot
 from scipy.interpolate import interp1d
-from formation.data_transformation import load_leader_trajectories
+from formation.data_transformation.load_leader_trajectories import load_leader_trajectories
 
 # using np.gradient to calculate a1_traj from p1dot from .csv file
 
-v1_func, v2_func, a1_func, a2_func = load_leader_trajectories("combined_data.csv", dt=0.1)
+p1_func, p2_func, v1_func, v2_func, a1_func, a2_func = load_leader_trajectories("combined_data.csv", dt=0.01)
 
 def control_law_timevarying(t, x, H, g_star, kp, kv, alpha):
 
@@ -43,19 +43,24 @@ def control_law_timevarying(t, x, H, g_star, kp, kv, alpha):
 
     u = term1 + term2 + term3 # (8,)
     
+    # positions, velocities, accelerations of 2 leaders
+    p1 = p1_func(t)
+    p2 = p2_func(t)   
     v1 = v1_func(t)
     v2 = v2_func(t)
     a1 = a1_func(t)
     a2 = a2_func(t)
 
+    pr = np.column_stack([p1, p2])
     vr = np.column_stack([v1, v2])
     vr_dot = np.column_stack([a1, a2])
 
     dp = v
     dv = u.reshape(d, n, order='F')
     dp[:, :nl] = vr
-    dp[:, :nl] = vr_dot
-
+    dv[:, :nl] = vr_dot
+    p[:, :nl] = pr 
+    
     dp = dp.flatten(order='F')
     dv = dv.flatten(order='F')
 
