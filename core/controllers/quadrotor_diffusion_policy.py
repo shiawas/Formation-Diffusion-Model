@@ -105,7 +105,6 @@ class QuadrotorDiffusionPolicy(BaseController):
                     naction = noisy_action - noise_pred
                 else:
                     naction = self.noise_scheduler.step(model_output=noise_pred, timestep=k, sample=naction).prev_sample
-                '''
                 if self.use_clf_cbf_guidance:
                     diffusing_action = self.normalizer.unnormalize_data(
                         naction.detach().to("cpu").numpy().squeeze(), stats=self.norm_stats["act"]
@@ -124,7 +123,6 @@ class QuadrotorDiffusionPolicy(BaseController):
                             refined_action[idx, ...] = self._calculate_refined_action_step(act, safe_yz_velocity)
                         naction = self.normalizer.normalize_data(np.array(refined_action), stats=self.norm_stats["act"])
                         naction = torch.from_numpy(naction).to(self.device, dtype=torch.float32).unsqueeze(0)
-                '''
         # unnormalize action
         naction = naction.detach().to("cpu").numpy()
         # (1, pred_horizon, action_dim)
@@ -154,7 +152,6 @@ class QuadrotorDiffusionPolicy(BaseController):
         }
         self.quadrotor_params = config["simulator"]
         self.use_single_step_inference = config.get("controller").get("common").get("use_single_step_inference", False)
-'''
     def calculate_force_command(self, state: np.ndarray, ref_state: np.ndarray) -> np.ndarray:
         y, y_dot, z, z_dot, phi, phi_dot = state
         yr, yr_dot, zr, zr_dot, phir, phir_dot = ref_state
@@ -189,4 +186,3 @@ class QuadrotorDiffusionPolicy(BaseController):
         refined_step_action[4] = -np.arctan(safe_yz_velocity[0] / safe_yz_velocity[1])
         # refinedstep_action[5] = (refinedstep_action[4] - pred_act[4]) / self.sampling_time
         return refined_step_action
-'''
