@@ -10,8 +10,8 @@ def states_to_p1p2(states_file: str, l_q: float, w_q: float):
     phis = states[:, 4]
     phis_dot = states[:, 5]
     # front points
-    front_xs = xs + l_q * np.cos(phis)
-    front_ys = ys + l_q * np.sin(phis)
+    front_xs = xs 
+    front_ys = ys 
 
     front_xs_dot = xs_dot - l_q * phis_dot * np.sin(phis)
     front_ys_dot = ys_dot + l_q * phis_dot * np.cos(phis)
