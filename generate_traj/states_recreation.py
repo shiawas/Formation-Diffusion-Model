@@ -13,8 +13,8 @@ def states_to_p1p2(states_file: str, l_q: float, w_q: float):
     front_xs = xs 
     front_ys = ys 
 
-    front_xs_dot = xs_dot - l_q * phis_dot * np.sin(phis)
-    front_ys_dot = ys_dot + l_q * phis_dot * np.cos(phis)
+    front_xs_dot = xs_dot 
+    front_ys_dot = ys_dot
 
     # half-width offsets
     dx = (w_q / 2) * -np.sin(phis)
