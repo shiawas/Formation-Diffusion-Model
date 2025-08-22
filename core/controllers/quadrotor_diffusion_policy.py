@@ -55,7 +55,7 @@ class QuadrotorDiffusionPolicy(BaseController):
         model: ConditionalUnet1D,
         noise_scheduler: DDPMScheduler,
         normalizer: BaseNormalizer,
-        # clf_cbf_controller: QuadrotorCLFCBFController,
+        clf_cbf_controller: QuadrotorCLFCBFController, #new
         config: Dict,
         device: str = "cuda",
     ):
@@ -67,8 +67,8 @@ class QuadrotorDiffusionPolicy(BaseController):
         self.set_config(config)
         self.net.to(self.device)
 
-        # self.clf_cbf_controller = clf_cbf_controller
-        # self.use_clf_cbf_guidance = False if clf_cbf_controller is None else True
+        self.clf_cbf_controller = clf_cbf_controller
+        self.use_clf_cbf_guidance = False if clf_cbf_controller is None else True
 
     def predict_action(self, obs_dict: Dict[str, List]) -> np.ndarray:
         # stack the observations
