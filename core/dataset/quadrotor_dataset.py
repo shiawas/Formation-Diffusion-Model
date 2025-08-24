@@ -110,7 +110,7 @@ class PlanarQuadrotorStateDataset(torch.utils.data.Dataset):
         # All demonstration episodes are concatinated in the first dimension N
         train_data = {
             # (N, action_dim)
-            "action": np.concatenate(dataset_root["desired_state"], axis=0),
+            "action": np.concatenate(dataset_root["control"], axis=0),
             # (N, obs_dim)
             "obs": np.concatenate(dataset_root["state"], axis=0),
             # (N, 7x7)
