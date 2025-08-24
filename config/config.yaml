@@ -10,7 +10,7 @@ controller:
         use_single_step_inference: true
     networks:
         obs_dim: 6
-        action_dim: 6
+        action_dim: 2
         obstacle_encode_dim: 49
     noise_scheduler:
         type: "ddpm"
